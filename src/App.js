@@ -1,24 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import {
+  Container,
+  CssBaseline,
+  Typography,
+  Grid,
+  Switch,
+  Divider,
+} from "@material-ui/core";
 function App() {
+  const [color, setColor] = useState(true);
+  const [data, setData] = useState([]);
+  const handleColor = () => {
+    setColor(!color);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div
+      style={{ height: "100vh", backgroundColor: color ? "white" : "black" }}
+    >
+      <Container maxWidth="md">
+        <div
+          style={{
+            paddingTop: 30,
+            color: color ? "black" : "white",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <Grid
+            container
+            style={{ display: "flex", justifyContent: "space-between" }}
+            alignItems="center"
+            spacing={1}
+            component="title"
+          >
+            <Grid item>
+              <Typography variant="h3">
+                <b>New English!</b>
+              </Typography>
+              <Typography variant="h6">
+                Học tiếng Anh dành cho người mới cùng Maximusss
+              </Typography>
+            </Grid>
+            <Grid>
+              Dark
+              <Switch
+                color={"secondary"}
+                checked={color}
+                onChange={handleColor}
+                name="color"
+              />
+              Light
+            </Grid>
+          </Grid>
+          <Divider />
+          <div className="data" style={{ paddingTop: 30 }}>
+            {data.length > 0 ? (
+              <p>Đã có dữ liệu</p>
+            ) : (
+              <h3 style={{ textAlign: "center" }}>
+                Chưa có nội dung nào ở đây
+              </h3>
+            )}
+          </div>
+        </div>
+      </Container>
     </div>
   );
 }
