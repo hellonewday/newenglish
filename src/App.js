@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import axios from "axios";
 import {
   Container,
-  CssBaseline,
   Typography,
   Grid,
   Switch,
@@ -15,6 +15,16 @@ function App() {
   const handleColor = () => {
     setColor(!color);
   };
+  useEffect(() => {
+    axios
+      .get("https://blog-api-98.herokuapp.com/blogs")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
   return (
     <div
       style={{ height: "100vh", backgroundColor: color ? "white" : "black" }}
