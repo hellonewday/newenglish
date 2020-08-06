@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import {
@@ -8,18 +7,34 @@ import {
   Grid,
   Switch,
   Divider,
+  TextField,
+  Button,
 } from "@material-ui/core";
 function App() {
   const [color, setColor] = useState(true);
   const [data, setData] = useState([]);
+  const [subForm, setSubForm] = useState({});
   const handleColor = () => {
     setColor(!color);
+  };
+  const handleSubscribe = (e) => {
+    setSubForm({ ...subForm, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmitSub = (event) => {
+    event.preventDefault();
+    console.log(subForm);
   };
   useEffect(() => {
     axios
       .get("https://blog-api-98.herokuapp.com/blogs")
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.data);
+        setData(
+          response.data.data.filter((item) => {
+            return item.genre === "English";
+          })
+        );
       })
       .catch((error) => {
         console.log(error.response);
@@ -63,14 +78,59 @@ function App() {
             </Grid>
           </Grid>
           <Divider />
-          <div className="data" style={{ paddingTop: 30 }}>
+          <div className="data" style={{ paddingTop: 10 }}>
             {data.length > 0 ? (
-              <p>Đã có dữ liệu</p>
+              data.map((item) => {
+                return (
+                  <div>
+                    <h1>{item.title}</h1>
+                    <p>{item.created_at}</p>
+                  </div>
+                );
+              })
             ) : (
               <h3 style={{ textAlign: "center" }}>
                 Chưa có nội dung nào ở đây
               </h3>
             )}
+          </div>
+          <Divider />
+          <div
+            className="subscribe"
+            style={{ paddingTop: 10, textAlign: "center" }}
+          >
+            <h2>Subscribe to New English Blog</h2>
+            <p>Receive latest news and posts from your mailbox.</p>
+            <TextField
+              label="Your name"
+              name="name"
+              type="text"
+              style={{ backgroundColor: color ? "" : "white" }}
+              variant="outlined"
+              fullWidth
+              onChange={handleSubscribe}
+            />
+            <br />
+            <br />
+            <TextField
+              label="Email"
+              name="email"
+              type="email"
+              variant="outlined"
+              style={{ backgroundColor: color ? "" : "white" }}
+              fullWidth
+              onChange={handleSubscribe}
+            />
+            <br />
+            <br />
+            <Button
+              onClick={handleSubmitSub}
+              color={color ? "primary" : "secondary"}
+              fullWidth
+              variant="contained"
+            >
+              Subscribe
+            </Button>
           </div>
         </div>
       </Container>
