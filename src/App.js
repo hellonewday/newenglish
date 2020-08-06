@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 function App() {
   const [color, setColor] = useState(true);
   const [data, setData] = useState([]);
@@ -53,6 +54,10 @@ function App() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>New English</title>
+        <meta name="description" content={"Trang web học tiếng Anh"} />
+      </Helmet>
       <div
         style={{
           minHeight: "100vh",
@@ -109,7 +114,9 @@ function App() {
                         </Link>
                       </header>
                       <p>{item.description}</p>
-                      <small>{item.created_at}</small>
+                      <small>
+                        {item.created_at} - {item.likes} interested
+                      </small>
                     </article>
                   );
                 })
