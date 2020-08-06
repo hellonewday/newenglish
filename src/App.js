@@ -11,6 +11,7 @@ import {
   Button,
 } from "@material-ui/core";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 function App() {
   const [color, setColor] = useState(true);
   const [data, setData] = useState([]);
@@ -54,8 +55,9 @@ function App() {
     <div>
       <div
         style={{
-          height: "100vh",
+          minHeight: "100vh",
           backgroundColor: color ? "whitesmoke" : "#282c35",
+          transition: "color 0.3s ease-out, background 0.3s ease-out",
         }}
       >
         <Container maxWidth="md">
@@ -98,7 +100,13 @@ function App() {
                   return (
                     <article style={{ padding: 10 }}>
                       <header>
-                        <h1>{item.title}</h1>
+                        <Link
+                          style={{ color: color ? "black" : "white" }}
+                          className="link-route"
+                          to={`/post/${item.id}`}
+                        >
+                          <h1>{item.title}</h1>
+                        </Link>
                       </header>
                       <p>{item.description}</p>
                       <small>{item.created_at}</small>
@@ -152,7 +160,7 @@ function App() {
           </div>
         </Container>
       </div>
-      <Footer />
+      <Footer color={color} />
     </div>
   );
 }
