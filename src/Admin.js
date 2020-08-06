@@ -3,13 +3,16 @@ import { TextField, Button, Divider } from "@material-ui/core";
 import Upload from "./Upload";
 import Axios from "axios";
 import DataTable from "./DataTable";
+import Subscribers from "./Subscribers";
 
 export default class Admin extends Component {
   state = {
     username: null,
     password: null,
     data: [],
+    subs: [],
   };
+
   componentDidMount() {
     Axios.get("https://blog-api-98.herokuapp.com/blogs")
       .then((response) => {
@@ -20,6 +23,13 @@ export default class Admin extends Component {
         });
       })
       .catch((error) => console.log(error.response));
+    Axios.get("https://blog-api-98.herokuapp.com/subscribers").then(
+      (response) => {
+        this.setState({
+          subs: response.data.data,
+        });
+      }
+    );
   }
 
   handleDelete = (id) => {
@@ -35,6 +45,18 @@ export default class Admin extends Component {
         } else alert("Error");
       })
       .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  handleRemove = (sub) => {
+    Axios.delete(`https://blog-api-98.herokuapp.com/blogs/${sub}`)
+      .then((response) => {
+        if (response.data.success) {
+          alert("Deleted successfully");
+        }
+      })
+      .catch((error) => {
+        alert("Delete failed");
         console.log(error.response);
       });
   };
@@ -79,6 +101,10 @@ export default class Admin extends Component {
             <Upload />
             <h1>Posts</h1>
             <DataTable data={this.state.data} onDelete={this.handleDelete} />
+            <br />
+            <br />
+            <h1>Subscribers</h1>
+            <Subscribers data={this.state.subs} onRemove={this.handleRemove} />
           </div>
         ) : (
           <form onSubmit={this.handleSubmit}>

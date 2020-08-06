@@ -8,13 +8,14 @@ export default class Upload extends Component {
     title: null,
     image: null,
     content: null,
+    description: null,
   };
   handleEditorChange = (content, editor) => {
     this.setState({ content: content });
   };
 
   handleChange = (e) => {
-    this.setState({ title: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleFileChange = (e) => {
@@ -27,8 +28,9 @@ export default class Upload extends Component {
     fd.append("image", this.state.image);
     fd.append("genre", "English");
     fd.append("title", this.state.title);
-    fd.append("desc", "Description");
+    fd.append("desc", this.state.description);
     fd.append("content", this.state.content);
+    fd.append("created_at", Date.now());
 
     Axios.post("https://blog-api-98.herokuapp.com/blogs", fd)
       .then((response) => {
@@ -44,6 +46,16 @@ export default class Upload extends Component {
         <TextField
           fullWidth
           label="Title"
+          name="title"
+          variant="outlined"
+          onChange={this.handleChange}
+        />
+        <br />
+        <br />
+        <TextField
+          fullWidth
+          label="Description"
+          name="description"
           variant="outlined"
           onChange={this.handleChange}
         />
