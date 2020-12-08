@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "267216bd9ed7d605881b6340ce130a9f",
+    "revision": "55cd928f5dae173cb7b27b6a0a7cae2a",
     "url": "/newenglish/index.html"
   },
   {
-    "revision": "40076308b0d0dd22a293",
+    "revision": "acc9fe220eabef3834ae",
     "url": "/newenglish/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/newenglish/static/js/2.bbd0843e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "40076308b0d0dd22a293",
-    "url": "/newenglish/static/js/main.32693a2c.chunk.js"
+    "revision": "acc9fe220eabef3834ae",
+    "url": "/newenglish/static/js/main.cc353643.chunk.js"
   },
   {
     "revision": "235906316c4b7bca3061",
