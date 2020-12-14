@@ -10,13 +10,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
-=======
-import Footer from "./Footer";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
->>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
 function App() {
   const [color, setColor] = useState(true);
   const [data, setData] = useState([]);
@@ -31,17 +25,9 @@ function App() {
   const handleSubmitSub = (event) => {
     event.preventDefault();
     axios
-<<<<<<< HEAD
       .post("http://localhost:8000/subscribers", subForm)
       .then((response) => {
         alert(response.data.message);
-=======
-      .post("https://blog-api-98.herokuapp.com/subscribers", subForm)
-      .then((response) => {
-        if (response.data.message === "Success") {
-          alert("Thanks for the sub!");
-        }
->>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -63,7 +49,6 @@ function App() {
       });
   }, []);
   return (
-<<<<<<< HEAD
     <div
       style={{ height: "100vh", backgroundColor: color ? "white" : "black" }}
     >
@@ -128,21 +113,6 @@ function App() {
             )}
           </div>
           <Divider />
-=======
-    <div>
-      <Helmet>
-        <title>New English</title>
-        <meta name="description" content={"Trang web học tiếng Anh"} />
-      </Helmet>
-      <div
-        style={{
-          minHeight: "100vh",
-          backgroundColor: color ? "whitesmoke" : "#282c35",
-          transition: "color 0.3s ease-out, background 0.3s ease-out",
-        }}
-      >
-        <Container maxWidth="md">
->>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
           <div
             style={{
               paddingTop: 30,
@@ -242,7 +212,6 @@ function App() {
               </Button>
             </div>
           </div>
-<<<<<<< HEAD
         </div>
         <Button
           style={{ position: "fixed", backgroundColor: "#75d18e", right: 0 }}
@@ -252,11 +221,6 @@ function App() {
           </Link>
         </Button>
       </Container>
-=======
-        </Container>
-      </div>
-      <Footer color={color} />
->>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
     </div>
   );
 }
