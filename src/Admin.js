@@ -3,8 +3,12 @@ import { TextField, Button, Divider } from "@material-ui/core";
 import Upload from "./Upload";
 import Axios from "axios";
 import DataTable from "./DataTable";
+<<<<<<< HEAD
 import SubscribersTable from "./SubscribersTable";
 import { Link } from "react-router-dom";
+=======
+import Subscribers from "./Subscribers";
+>>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
 
 export default class Admin extends Component {
   state = {
@@ -13,6 +17,7 @@ export default class Admin extends Component {
     data: [],
     subs: [],
   };
+
   componentDidMount() {
     Axios.get("http://localhost:8000/blogs")
       .then((response) => {
@@ -23,12 +28,22 @@ export default class Admin extends Component {
         });
       })
       .catch((error) => console.log(error.response));
+<<<<<<< HEAD
 
     Axios.get("http://localhost:8000/subscribers").then((response) => {
       this.setState({
         subs: response.data.data,
       });
     });
+=======
+    Axios.get("https://blog-api-98.herokuapp.com/subscribers").then(
+      (response) => {
+        this.setState({
+          subs: response.data.data,
+        });
+      }
+    );
+>>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
   }
 
   handleDelete = (id) => {
@@ -47,6 +62,7 @@ export default class Admin extends Component {
         console.log(error.response);
       });
   };
+<<<<<<< HEAD
 
   handleDeleteSub = (id) => {
     Axios.delete(`http://localhost:8000/subscribers/${id}`)
@@ -61,6 +77,17 @@ export default class Admin extends Component {
         } else alert("Error");
       })
       .catch((error) => {
+=======
+  handleRemove = (sub) => {
+    Axios.delete(`https://blog-api-98.herokuapp.com/blogs/${sub}`)
+      .then((response) => {
+        if (response.data.success) {
+          alert("Deleted successfully");
+        }
+      })
+      .catch((error) => {
+        alert("Delete failed");
+>>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
         console.log(error.response);
       });
   };
@@ -108,11 +135,17 @@ export default class Admin extends Component {
             <h1>Posts</h1>
             <DataTable data={this.state.data} onDelete={this.handleDelete} />
             <br />
+<<<<<<< HEAD
             <h1>Subscribers</h1>
             <SubscribersTable
               subs={this.state.subs}
               onDeleteSub={this.handleDeleteSub}
             />
+=======
+            <br />
+            <h1>Subscribers</h1>
+            <Subscribers data={this.state.subs} onRemove={this.handleRemove} />
+>>>>>>> 2ac9b4ccf8d8a81b4777a5a1dfcc9a810d0e3d8b
           </div>
         ) : (
           <form onSubmit={this.handleSubmit}>

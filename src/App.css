@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+* {
+  font-family: "Merriweather", "Georgia", serif;
+}
+
+.link-route {
+  text-decoration: none;
+}
+
+.footer {
+  margin-top: 10px;
+}
