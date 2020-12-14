@@ -10,6 +10,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 function App() {
   const [color, setColor] = useState(true);
   const [data, setData] = useState([]);
@@ -23,11 +24,18 @@ function App() {
 
   const handleSubmitSub = (event) => {
     event.preventDefault();
-    console.log(subForm);
+    axios
+      .post("http://localhost:8000/subscribers", subForm)
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
   };
   useEffect(() => {
     axios
-      .get("https://blog-api-98.herokuapp.com/blogs")
+      .get("http://localhost:8000/blogs")
       .then((response) => {
         console.log(response.data.data);
         setData(
@@ -83,7 +91,17 @@ function App() {
               data.map((item) => {
                 return (
                   <div>
-                    <h1>{item.title}</h1>
+                    <h1>
+                      <Link
+                        style={{
+                          textDecoration: "none",
+                          color: color ? "black" : "white",
+                        }}
+                        to={`/posts/${item.id}`}
+                      >
+                        {item.title}
+                      </Link>
+                    </h1>
                     <p>{item.created_at}</p>
                   </div>
                 );
@@ -133,6 +151,13 @@ function App() {
             </Button>
           </div>
         </div>
+        <Button
+          style={{ position: "fixed", backgroundColor: "#75d18e", right: 0 }}
+        >
+          <Link to="/admin" style={{ textDecoration: "none", color: "black" }}>
+            Admin
+          </Link>
+        </Button>
       </Container>
     </div>
   );

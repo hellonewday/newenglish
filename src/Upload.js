@@ -30,10 +30,12 @@ export default class Upload extends Component {
     fd.append("desc", "Description");
     fd.append("content", this.state.content);
 
-    Axios.post("https://blog-api-98.herokuapp.com/blogs", fd)
+    Axios.post("http://localhost:8000/blogs", fd)
       .then((response) => {
-        if (response.data.success) alert("Upload successfully");
-        window.location.reload();
+        if (response.data.success) {
+          alert("Them bai viet thanh cong");
+          window.location.reload();
+        }
       })
       .catch((error) => console.log(error.response));
   };
